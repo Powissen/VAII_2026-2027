@@ -75,5 +75,8 @@ Vedľajšou úlohou bude internetový obchod, na ktorom bude servis ponúkať hl
 - Hlavný panel - Stránka na pridávanie/odoberanie produktov, nastavovanie cien, pridávanie zamestnancov
 
 ## Rozdelenie funkcionality
-Základné funkcie zahrňujú všetky funkcionality spomenuté v stručnom opise projektu, teda musí poskytovať všetky náležitosti súvisiace so servisom zariadení a taktiež internetový obchod, ktorý musí obsahovať aspoň primitívnu možnosť na vytvorenie objednávky. V prípade dostatku času bude skvelým doplnkom vytvorenie plnohodnotného nákupného košíka s viacerými platobnými bránami a prepojenami s viacerými dopravcami, napr. Packeta.
-Rozšírujúca funkcia: Za jednotlivé nákupy a opravy v servise by zákazníci získavali body, ktoré by sa podľa dosiahnutej úrovne pretavovali do cien na E-Shope.
+Základné funkcie zahŕňajú všetky funkcionality spomenuté v stručnom opise projektu, teda aplikácia musí poskytovať všetky náležitosti súvisiace so servisom zariadení a taktiež internetový obchod, ktorý musí obsahovať aspoň jednoduchú možnosť vytvorenia objednávky.
+
+Rozširujúce funkcie, ktoré budú implementované v prípade dostatku času:
+- Plnohodnotný nákupný košík s viacerými platobnými bránami a prepojením na viacerých dopravcov, napr. Packeta
+- Bodový systém: zákazníci by za jednotlivé nákupy a opravy v servise získavali body, ktoré by sa podľa dosiahnutej úrovne pretavovali do zliav v e-shope
