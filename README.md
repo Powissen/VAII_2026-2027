@@ -11,10 +11,10 @@ Zákazník bude mať možnosť sa na stránke zaregistrovať a následne objedna
 Vedľajšou úlohou bude internetový obchod, na ktorom bude servis ponúkať hlavne repasované zariadenia, ale taktiež hardvérové komponenty a príslušenstvo k počítačom.
 
 ## Role v projekte
-Návštevník - Neregistrovaný používateľ, ktorý má prístup k registrácií / prihláseniu a k prezeraniu produktov internetového obchodu
-Registrovaný zákazník - Prihlásený používateľ, ktorý má právo objednať servis a nakupovať v internetovom obchode
-Technik - Pracovník servisu, ktorý príjma objednávky, určuje cenu opravy a komunikuje so zákazníkom
-Vedúci - Pridáva nové produkty, nastavuje ceny, pridáva nových zamestnancov
+- Návštevník - Neregistrovaný používateľ, ktorý má prístup k registrácií / prihláseniu a k prezeraniu produktov internetového obchodu
+- Registrovaný zákazník - Prihlásený používateľ, ktorý má právo objednať servis a nakupovať v internetovom obchode
+- Technik - Pracovník servisu, ktorý príjma objednávky, určuje cenu opravy a komunikuje so zákazníkom
+- Vedúci - Pridáva nové produkty, nastavuje ceny, pridáva nových zamestnancov
 
 ## Prípady použitia podľa rolí
 ### Návštevník
@@ -33,7 +33,6 @@ Vedúci - Pridáva nové produkty, nastavuje ceny, pridáva nových zamestnancov
 - sleduje aktuálny stav svojich servisných objednávok
 - prijme cenovú ponuku, odstúpi od opravy alebo ponúkne zariadenie servisu na predaj
 - upraví svoj profil (osobné a firemné údaje)
-- odhlási sa
 
 ### Technik
 - zobrazí zoznam servisných objednávok a filtruje ich podľa stavu
@@ -50,30 +49,30 @@ Vedúci - Pridáva nové produkty, nastavuje ceny, pridáva nových zamestnancov
 - zobrazí prehľad všetkých e-shop a servisných objednávok
 
 ## Plánované entity
-Používateľ - Základné dáta používateľa (meno, adresa, email, príp. firemné údaje...)
-Kategória - Kategória konkrétneho produktu v E-Shope
-E-Shop produkt - Informácie o konkrétnom produkte (názov, popis, cena, kategória...)
-E-Shop objednávka - Informácie o objednávke (používateľ, obsah objednávky, informácie o platbe...)
-Položka E-Shop objednávky - Jeden produkt v objednávke (objednávka, produkt, množstvo, cena v čase nákupu)
-Objednávka servisu - Servisné informácie (používateľ, dátum vyzdvihnutia, informácie o zariadení...)
-Správa - (text, odosielateľ, čas...)
+- Používateľ - Základné dáta používateľa (meno, adresa, email, príp. firemné údaje...)
+- Kategória - Kategória konkrétneho produktu v E-Shope
+- E-Shop produkt - Informácie o konkrétnom produkte (názov, popis, cena, kategória...)
+- E-Shop objednávka - Informácie o objednávke (používateľ, obsah objednávky, informácie o platbe...)
+- Položka E-Shop objednávky - Jeden produkt v objednávke (objednávka, produkt, množstvo, cena v čase nákupu)
+- Objednávka servisu - Servisné informácie (používateľ, dátum vyzdvihnutia, informácie o zariadení...)
+- Správa - (text, odosielateľ, čas...)
 
 ## Vzťahy medzi entitami
-Kategória 1:N E-Shop produkt - jedna kategória obsahuje viac produktov, každý produkt patrí práve do jednej kategórie
-Používateľ 1:N E-Shop objednávka - jeden zákazník môže vytvoriť viac objednávok, každá objednávka patrí jednému zákazníkovi
-E-Shop objednávka 1:N Položka E-Shop objednávky - jedna objednávka obsahuje jednu alebo viac položiek
-E-Shop produkt 1:N Položka E-Shop objednávky - jeden produkt sa môže vyskytovať v položkách mnohých objednávok
-E-Shop objednávka M:N E-Shop produkt - výsledný vzťah medzi objednávkou a produktom, ktorý je v databáze rozložený cez asociačnú tabuľku Položka E-Shop objednávky (obsahuje množstvo a cenu v čase nákupu)
-Používateľ (zákazník) 1:N Objednávka servisu - jeden zákazník môže zadať viac servisných objednávok, každá patrí jednému zákazníkovi
+- Kategória 1:N E-Shop produkt - jedna kategória obsahuje viac produktov, každý produkt patrí práve do jednej kategórie
+- Používateľ 1:N E-Shop objednávka - jeden zákazník môže vytvoriť viac objednávok, každá objednávka patrí jednému zákazníkovi
+- E-Shop objednávka 1:N Položka E-Shop objednávky - jedna objednávka obsahuje jednu alebo viac položiek
+- E-Shop produkt 1:N Položka E-Shop objednávky - jeden produkt sa môže vyskytovať v položkách mnohých objednávok
+- E-Shop objednávka M:N E-Shop produkt - výsledný vzťah medzi objednávkou a produktom, ktorý je v databáze rozložený cez asociačnú tabuľku Položka E-Shop objednávky (obsahuje množstvo a cenu v čase nákupu)
+- Používateľ (zákazník) 1:N Objednávka servisu - jeden zákazník môže zadať viac servisných objednávok, každá patrí jednému zákazníkovi
 
 ## Hlavné stránky aplikácie
-Hlavná stránka - Zobrazuje ponúkané služby
-Prihlásenie / registrácia - Stránka na zadávanie údajov
-Internetový obchod - Zoznam všetkých ponúkaných produktov s príslušnými cenami
-Nákupný košík - Vedľajšia stránka internetového obchodu, ktorá bude slúžiť na sumarizáciu a dokončenie nákupu
-Zákaznícky panel - Možnosť vyplniť formulár na objednávku servisu, sledovanie stavu servisu, komunikácia s technikom
-Technikov panel - Stránka na spracovanie objednávok a komunikáciu so zákazníkom
-Hlavný panel - Stránka na pridávanie/odoberanie produktov, nastavovanie cien, pridávanie zamestnancov
+- Hlavná stránka - Zobrazuje ponúkané služby
+- Prihlásenie / registrácia - Stránka na zadávanie údajov
+- Internetový obchod - Zoznam všetkých ponúkaných produktov s príslušnými cenami
+- Nákupný košík - Vedľajšia stránka internetového obchodu, ktorá bude slúžiť na sumarizáciu a dokončenie nákupu
+- Zákaznícky panel - Možnosť vyplniť formulár na objednávku servisu, sledovanie stavu servisu, komunikácia s technikom
+- Technikov panel - Stránka na spracovanie objednávok a komunikáciu so zákazníkom
+- Hlavný panel - Stránka na pridávanie/odoberanie produktov, nastavovanie cien, pridávanie zamestnancov
 
 ## Rozdelenie funkcionality
 Základné funkcie zahrňujú všetky funkcionality spomenuté v stručnom opise projektu, teda musí poskytovať všetky náležitosti súvisiace so servisom zariadení a taktiež internetový obchod, ktorý musí obsahovať aspoň primitívnu možnosť na vytvorenie objednávky. V prípade dostatku času bude skvelým doplnkom vytvorenie plnohodnotného nákupného košíka s viacerými platobnými bránami a prepojenami s viacerými dopravcami, napr. Packeta.
