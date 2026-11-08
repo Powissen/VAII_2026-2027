@@ -1,6 +1,8 @@
 <?php
 
 /** @var \Framework\Support\LinkGenerator $link */
+/** @var \App\Models\Product[] $products */
+/** @var \App\Models\Category[] $categories */
 ?>
 
 <main class="flex flex-col items-center mt-6">
@@ -39,6 +41,14 @@
     <section class="flex flex-col w-full my-12">
         <div class="flex flex-col lg:flex-row justify-between lg:px-12 w-full">
             <p class="text-xl lg:text-2xl font-bold text-center">Repasované produkty a príslušenstvo</p>
+
+            <!-- Dočasný presun na formulár -->
+            <a 
+                href="<?= $link->url('product.form') ?>"
+                class="bg-darkpurple text-white font-bold rounded-lg p-2">
+                Pridať produkt
+            </a>
+        
             <div class="flex flex-row items-center justify-center mt-2 gap-x-4">
             <p>Filtrovať podľa kategórií</p>
             <i class="fa-solid fa-sliders text-2xl"></i>
@@ -46,27 +56,62 @@
         </div>
 
         <div class="flex flex-wrap justify-center mt-6 gap-16">
-            <!-- 1: Notebook -->
-            <div class="flex flex-row justify-around">
-            <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
-                <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
-                </div>
-                <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                    <p class="text-sm text-lightgreen font-bold">Notebook</p>
-                </div>
-                <p class="mt-2">Lenovo ThinkPad T480 i5</p>
-                <p class="h-8 text-sm">Intel Core i5, 16GB RAM, 512GB SSD, Windows 11 Pro</p>
-                <div class="flex-1 flex items-center justify-between mt-2">
-                    <p class="text-xl font-bold">349.00€</p>
-                    <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
-                </div>
-                </div>
-            </div>
-            </div>
+            
+            <?php foreach ($products as $product) : ?>
+                <div class="flex flex-row justify-around">
+                    <div class="w-96 h-max border border-3 border-gray-400 rounded-xl">
+                        <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
+                        <img class="w-full h-32 object-contain"  src="<?= $product->getImage() ?>">
+                        </div>
+                        <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
+                            <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
+                                <p class="text-sm text-lightgreen font-bold"><?= $product->getCategory() ?></p>
+                            </div>
+                            <p class="mt-2"><?= $product->getName() ?></p>
+                            <p class="h-8 text-sm"><?= $product->getParameters() ?></p>
+                            <div class="flex-1 flex items-center justify-between mt-2">
+                                <p class="text-xl font-bold"><?= $product->getPrice() ?>€</p>
+                                <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
+                            </div>
 
-            <!-- 2: Stolný počítač -->
+                            <form action="<?= $link->url('product.edit') ?>" method="post" class="w-full">
+                                <input type="hidden" name="id" value="<?= $product->getId() ?>">
+                                <button type="submit" class="w-full my-2 py-1 bg-lightpurple text-white font-bold rounded-lg cursor-pointer">
+                                    Upraviť produkt
+                                </button>
+                            </form>
+
+                            <form action="<?= $link->url('product.delete') ?>" method="post" class="w-full">
+                                <input type="hidden" name="id" value="<?= $product->getId() ?>">
+                                <button type="submit" class="w-full my-2 py-1 bg-red-500 text-white font-bold rounded-lg cursor-pointer">
+                                    Zmazať produkt
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+            <!-- <div class="flex flex-row justify-around">
+                <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
+                    <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
+                    <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
+                    </div>
+                    <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
+                        <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
+                            <p class="text-sm text-lightgreen font-bold">Notebook</p>
+                        </div>
+                        <p class="mt-2">Lenovo ThinkPad T480 i5</p>
+                        <p class="h-8 text-sm">Intel Core i5, 16GB RAM, 512GB SSD, Windows 11 Pro</p>
+                        <div class="flex-1 flex items-center justify-between mt-2">
+                            <p class="text-xl font-bold">349.00€</p>
+                            <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
             <div class="flex flex-row h-max justify-around">
             <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
                 <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
@@ -86,7 +131,6 @@
             </div>
             </div>
 
-            <!-- 3: Grafická karta -->
             <div class="flex flex-row justify-around">
             <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
                 <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
@@ -106,7 +150,6 @@
             </div>
             </div>
 
-            <!-- 4: Monitor -->
             <div class="flex flex-row justify-around">
             <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
                 <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
@@ -126,7 +169,6 @@
             </div>
             </div>
 
-            <!-- 5: Notebook -->
             <div class="flex flex-row justify-around">
             <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
                 <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
@@ -146,7 +188,6 @@
             </div>
             </div>
 
-            <!-- 6: SSD disk -->
             <div class="flex flex-row justify-around">
             <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
                 <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
@@ -166,7 +207,6 @@
             </div>
             </div>
 
-            <!-- 7: Klávesnica -->
             <div class="flex flex-row justify-around">
             <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
                 <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
@@ -186,7 +226,6 @@
             </div>
             </div>
 
-            <!-- 8: Dokovacia stanica -->
             <div class="flex flex-row justify-around">
             <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
                 <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
@@ -204,7 +243,7 @@
                 </div>
                 </div>
             </div>
-            </div>
+            </div> -->
         </div>
     </section>
 </main>

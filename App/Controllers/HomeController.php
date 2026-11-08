@@ -6,6 +6,9 @@ use Framework\Core\BaseController;
 use Framework\Http\Request;
 use Framework\Http\Responses\Response;
 
+use App\Models\Category;
+use App\Models\Product;
+
 /**
  * Class HomeController
  * Handles actions related to the home page and other public actions.
@@ -39,7 +42,9 @@ class HomeController extends BaseController
      */
     public function index(Request $request): Response
     {
-        return $this->html();
+        $categories = Category::getAll();
+        $products = Product::getAll();
+        return $this->html(compact('categories', 'products'));
     }
 
     /**
