@@ -42,11 +42,11 @@
         <div class="flex flex-col lg:flex-row justify-between lg:px-12 w-full">
             <p class="text-xl lg:text-2xl font-bold text-center">Repasované produkty a príslušenstvo</p>
 
-            <!-- Dočasný presun na formulár -->
+            <!-- Dočasný presun na editovaciu stránku-->
             <a 
-                href="<?= $link->url('product.form') ?>"
+                href="<?= $link->url('category.index') ?>"
                 class="bg-darkpurple text-white font-bold rounded-lg p-2">
-                Pridať produkt
+                Editácia sortimentu
             </a>
         
             <div class="flex flex-row items-center justify-center mt-2 gap-x-4">
@@ -58,192 +58,27 @@
         <div class="flex flex-wrap justify-center mt-6 gap-16">
             
             <?php foreach ($products as $product) : ?>
-                <div class="flex flex-row justify-around">
-                    <div class="w-96 h-max border border-3 border-gray-400 rounded-xl">
-                        <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                        <img class="w-full h-32 object-contain"  src="<?= $product->getImage() ?>">
-                        </div>
-                        <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                            <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                                <p class="text-sm text-lightgreen font-bold"><?= $product->getCategory() ?></p>
+                <?php if ($product->getCategoryId() != null) : ?>
+                    <div class="flex flex-row justify-around">
+                        <div class="w-96 h-max border border-3 border-gray-400 rounded-xl">
+                            <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
+                            <img class="w-full h-32 object-contain" src="<?= $product->getImage() ?>">
                             </div>
-                            <p class="mt-2"><?= $product->getName() ?></p>
-                            <p class="h-8 text-sm"><?= $product->getParameters() ?></p>
-                            <div class="flex-1 flex items-center justify-between mt-2">
-                                <p class="text-xl font-bold"><?= $product->getPrice() ?>€</p>
-                                <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
+                            <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
+                                <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
+                                    <p class="text-sm text-lightgreen font-bold"><?= $product->getCategory() ?></p>
+                                </div>
+                                <p class="mt-2"><?= $product->getName() ?></p>
+                                <p class="h-8 text-sm"><?= $product->getParameters() ?></p>
+                                <div class="flex-1 flex items-center justify-between mt-2">
+                                    <p class="text-xl font-bold"><?= $product->getPrice() ?>€</p>
+                                    <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
+                                </div>
                             </div>
-
-                            <form action="<?= $link->url('product.edit') ?>" method="post" class="w-full">
-                                <input type="hidden" name="id" value="<?= $product->getId() ?>">
-                                <button type="submit" class="w-full my-2 py-1 bg-lightpurple text-white font-bold rounded-lg cursor-pointer">
-                                    Upraviť produkt
-                                </button>
-                            </form>
-
-                            <form action="<?= $link->url('product.delete') ?>" method="post" class="w-full">
-                                <input type="hidden" name="id" value="<?= $product->getId() ?>">
-                                <button type="submit" class="w-full my-2 py-1 bg-red-500 text-white font-bold rounded-lg cursor-pointer">
-                                    Zmazať produkt
-                                </button>
-                            </form>
-
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
             <?php endforeach; ?>
-
-            <!-- <div class="flex flex-row justify-around">
-                <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
-                    <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                    <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
-                    </div>
-                    <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                        <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                            <p class="text-sm text-lightgreen font-bold">Notebook</p>
-                        </div>
-                        <p class="mt-2">Lenovo ThinkPad T480 i5</p>
-                        <p class="h-8 text-sm">Intel Core i5, 16GB RAM, 512GB SSD, Windows 11 Pro</p>
-                        <div class="flex-1 flex items-center justify-between mt-2">
-                            <p class="text-xl font-bold">349.00€</p>
-                            <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-
-            <div class="flex flex-row h-max justify-around">
-            <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
-                <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
-                </div>
-                <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                    <p class="text-sm text-lightgreen font-bold">Stolný počítač</p>
-                </div>
-                <p class="mt-2">Dell OptiPlex 7050 SFF</p>
-                <p class="h-8 text-sm">Intel Core i7-7700, 16GB RAM, 256GB SSD, Windows 11 Pro</p>
-                <div class="flex-1 flex items-center justify-between mt-2">
-                    <p class="text-xl font-bold">279.00€</p>
-                    <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
-                </div>
-                </div>
-            </div>
-            </div>
-
-            <div class="flex flex-row justify-around">
-            <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
-                <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
-                </div>
-                <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                    <p class="text-sm text-lightgreen font-bold">Grafická karta</p>
-                </div>
-                <p class="mt-2">NVIDIA GeForce GTX 1660 Super</p>
-                <p class="h-8 text-sm">6GB GDDR6, 3× DisplayPort, HDMI, PCIe 3.0 x16</p>
-                <div class="flex-1 flex items-center justify-between mt-2">
-                    <p class="text-xl font-bold">129.00€</p>
-                    <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
-                </div>
-                </div>
-            </div>
-            </div>
-
-            <div class="flex flex-row justify-around">
-            <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
-                <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
-                </div>
-                <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                    <p class="text-sm text-lightgreen font-bold">Monitor</p>
-                </div>
-                <p class="mt-2">Dell UltraSharp U2419H</p>
-                <p class="h-8 text-sm">24", Full HD IPS, HDMI, DisplayPort, výškovo nastaviteľný stojan</p>
-                <div class="flex-1 flex items-center justify-between mt-2">
-                    <p class="text-xl font-bold">119.00€</p>
-                    <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
-                </div>
-                </div>
-            </div>
-            </div>
-
-            <div class="flex flex-row justify-around">
-            <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
-                <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
-                </div>
-                <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                    <p class="text-sm text-lightgreen font-bold">Notebook</p>
-                </div>
-                <p class="mt-2">HP EliteBook 840 G5</p>
-                <p class="h-8 text-sm">Intel Core i5-8350U, 8GB RAM, 256GB SSD, 14" Full HD</p>
-                <div class="flex-1 flex items-center justify-between mt-2">
-                    <p class="text-xl font-bold">299.00€</p>
-                    <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
-                </div>
-                </div>
-            </div>
-            </div>
-
-            <div class="flex flex-row justify-around">
-            <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
-                <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
-                </div>
-                <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                    <p class="text-sm text-lightgreen font-bold">SSD disk</p>
-                </div>
-                <p class="mt-2">Samsung 970 EVO Plus 1TB</p>
-                <p class="h-8 text-sm">NVMe M.2, rýchlosť čítania až 3500 MB/s</p>
-                <div class="flex-1 flex items-center justify-between mt-2">
-                    <p class="text-xl font-bold">79.00€</p>
-                    <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
-                </div>
-                </div>
-            </div>
-            </div>
-
-            <div class="flex flex-row justify-around">
-            <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
-                <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
-                </div>
-                <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                    <p class="text-sm text-lightgreen font-bold">Príslušenstvo</p>
-                </div>
-                <p class="mt-2">Logitech K380 Multi-Device</p>
-                <p class="h-8 text-sm">Bluetooth klávesnica, tichý chod, párovanie až 3 zariadení, SK/CZ</p>
-                <div class="flex-1 flex items-center justify-between mt-2">
-                    <p class="text-xl font-bold">39.00€</p>
-                    <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
-                </div>
-                </div>
-            </div>
-            </div>
-
-            <div class="flex flex-row justify-around">
-            <div class="w-96 h-80 border border-3 border-gray-400 rounded-xl">
-                <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
-                <img class="w-full h-32 object-contain"  src="<?= $link->asset('images/refurbished.png') ?>">
-                </div>
-                <div class="flex flex-col h-1/2 p-3 bg-gray-200 rounded-b-xl">
-                <div class="w-fit px-2 bg-lightgreen/25 border-2 border-lightgreen rounded-xl">
-                    <p class="text-sm text-lightgreen font-bold">Príslušenstvo</p>
-                </div>
-                <p class="mt-2">Lenovo ThinkPad USB-C Dock Gen 2</p>
-                <p class="h-8 text-sm">2× DisplayPort, HDMI, Ethernet, 4× USB, nabíjanie notebooku</p>
-                <div class="flex-1 flex items-center justify-between mt-2">
-                    <p class="text-xl font-bold">89.00€</p>
-                    <button class="px-2 py-1 bg-lightgreen text-sm text-white font-bold rounded-xl">Pridať do košíka</button>
-                </div>
-                </div>
-            </div>
-            </div> -->
         </div>
     </section>
 </main>

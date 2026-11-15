@@ -67,4 +67,9 @@ class HomeController extends BaseController
     {
         return $this->html();
     }
+
+    public function edit(Request $request): Response
+    {
+        return $this->html();
+    }
 }

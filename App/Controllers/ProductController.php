@@ -36,7 +36,7 @@ class ProductController extends BaseController
             $product?->delete();
         }
 
-        return $this->redirect($this->url('home.index'));
+        return $this->redirect($this->url('category.index'));
     }
 
     public function add() : Response
@@ -54,7 +54,7 @@ class ProductController extends BaseController
 
         $product->save();
 
-        return $this->redirect($this->url('home.index'));
+        return $this->redirect($this->url('category.index'));
     }
 
     public function edit() : Response

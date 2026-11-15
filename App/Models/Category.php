@@ -6,19 +6,25 @@ use Framework\Core\Model;
 
 class Category extends Model
 {
-    protected int $id;
-    protected string $name = "Neznáme";
+    protected ?int $id = null;
+    protected ?string $name = null;
+    protected ?string $description = null;
 
 
     // --- GETTERY ---
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
     }
 
 
@@ -32,6 +38,12 @@ class Category extends Model
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
         return $this;
     }
 }

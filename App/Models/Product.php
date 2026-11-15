@@ -7,7 +7,7 @@ use Framework\Core\Model;
 class Product extends Model
 {
     protected int $id;
-    protected int $category_id = 0;
+    protected ?int $category_id = 0;
     protected string $name = "Neznamy produkt";
     protected string $parameters = '';
     protected ?string $description = null;
@@ -23,10 +23,14 @@ class Product extends Model
 
     public function getCategory(): string
     {
+        if ($this->category_id == null) {
+            return 'Bez kategórie';
+        }
+
         return Category::getOne($this->category_id)->getName();
     }
 
-    public function getCategoryId(): int
+    public function getCategoryId(): ?int
     {
         return $this->category_id;
     }
