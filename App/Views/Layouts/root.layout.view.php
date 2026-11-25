@@ -13,6 +13,7 @@
     <title><?= App\Configuration::APP_NAME ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link rel="stylesheet" href="<?= $link->asset('css/style.css') ?>">
+    <script src="<?= $link->asset('js/category_filter.js') ?>"></script>
 </head>
 
 <body class="bg-[#F4F4F4]">

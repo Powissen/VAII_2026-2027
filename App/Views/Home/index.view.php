@@ -39,8 +39,11 @@
 
     <!-- Online shop [SECTION] -->
     <section class="flex flex-col w-full my-12">
-        <div class="flex flex-col lg:flex-row justify-between lg:px-12 w-full">
-            <p class="text-xl lg:text-2xl font-bold text-center">Repasované produkty a príslušenstvo</p>
+        <div class="flex flex-col lg:flex-row justify-between items-center lg:px-12 w-full">
+            <div class="flex flex-col">
+                <p class="text-xl lg:text-2xl font-bold text-center">Repasované produkty a príslušenstvo</p>
+                <p id="products-count" class="text-sm font-bold text-gray-600"></p>
+            </div>
 
             <!-- Dočasný presun na editovaciu stránku-->
             <a 
@@ -50,16 +53,27 @@
             </a>
         
             <div class="flex flex-row items-center justify-center mt-2 gap-x-4">
-            <p>Filtrovať podľa kategórií</p>
-            <i class="fa-solid fa-sliders text-2xl"></i>
+                <p>Filtrovať podľa kategórií</p>
+                <!-- <i class="fa-solid fa-sliders text-2xl"></i> -->
+                 <div class="flex flex-col items-center my-6 gap-2">
+                    <select id="category-selector" class="p-2 border-2 rounded-lg cursor-pointer">
+                        <option value="all">Všetky kategórie</option>
+                        <?php foreach ($categories as $category) : ?>
+                            <option value="<?= $category->getId() ?? 'none' ?>">
+                                <?= htmlspecialchars($category->getName() ?? '') ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <p id="products-count" class="text-sm font-bold text-gray-600"></p>
+                </div>
             </div>
         </div>
 
-        <div class="flex flex-wrap justify-center mt-6 gap-16">
-            
+        <div id="product-container" class="flex flex-wrap justify-center mt-6 gap-16">
             <?php foreach ($products as $product) : ?>
                 <?php if ($product->getCategoryId() != null) : ?>
-                    <div class="flex flex-row justify-around">
+                    <div data-category-id="<?= $product->getCategoryId() ?>" class="product flex flex-row justify-around">
                         <div class="w-96 h-max border border-3 border-gray-400 rounded-xl">
                             <div class="h-1/2 bg-white rounded-t-xl border-b-3 border-gray-400">
                             <img class="w-full h-32 object-contain" src="<?= $product->getImage() ?>">
